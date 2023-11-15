@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_partners"
+            android:icon="@drawable/ic_menu_partners"
+            android:title="@string/menu_partners" />
+        <item
+            android:id="@+id/nav_recycle"
+            android:icon="@drawable/ic_menu_recycle"
+            android:title="@string/menu_recycle" />
+        <item
+            android:id="@+id/nav_apply"
+            android:icon="@drawable/ic_menu_apply"
+            android:title="@string/menu_apply" />
+        <item
+            android:id="@+id/nav_company"
+            android:icon="@drawable/ic_menu_company"
+            android:title="@string/menu_company" />
+        <item
+            android:id="@+id/nav_review"
+            android:icon="@drawable/ic_menu_review"
+            android:title="@string/menu_review" />
+
+
+    </group>
+</menu>

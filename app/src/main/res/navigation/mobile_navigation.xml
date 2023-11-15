@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.soustenir.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_apply"
+        android:name="com.example.soustenir.ui.apply.ApplyFragment"
+        android:label="@string/menu_apply"
+        tools:layout="@layout/fragment_apply" />
+
+    <fragment
+        android:id="@+id/nav_company"
+        android:name="com.example.soustenir.ui.company.CompanyFragment"
+        android:label="@string/menu_company"
+        tools:layout="@layout/fragment_company" />
+
+    <fragment
+        android:id="@+id/nav_recycle"
+        android:name="com.example.soustenir.ui.recycle.RecycleFragment"
+        android:label="@string/menu_recycle"
+        tools:layout="@layout/fragment_recycle" />
+
+    <fragment
+        android:id="@+id/nav_partners"
+        android:name="com.example.soustenir.ui.partners.PartnersFragment"
+        android:label="@string/menu_partners"
+        tools:layout="@layout/fragment_partners" />
+
+    <fragment
+        android:id="@+id/nav_review"
+        android:name="com.example.soustenir.ui.review.ReviewFragment"
+        android:label="@string/menu_review"
+        tools:layout="@layout/fragment_review" />
+
+</navigation>
