@@ -4,7 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ui.home.HomeFragment">
+
+
+    <View
+        android:id="@+id/ic_logo"
+        android:layout_width="242dp"
+        android:layout_height="207dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/ic_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_home"

@@ -12,9 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.soustenir.databinding.FragmentCompanyBinding;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
 public class CompanyFragment extends Fragment {
 
     private FragmentCompanyBinding binding;
+    private CompanyAdapter companyAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -24,8 +30,19 @@ public class CompanyFragment extends Fragment {
         binding = FragmentCompanyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textCompany;
-        companyViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        RecyclerView companyView = binding.companyView;
+        companyView.setLayoutManager(new LinearLayoutManager(getContext()));
+        companyAdapter = new CompanyAdapter(new ArrayList<>());
+        companyView.setAdapter(companyAdapter);
+
+        // Observe the LiveData in the ViewModel
+        companyViewModel.getCompaniesLiveData().observe(getViewLifecycleOwner(), companies -> {
+            // Update the adapter's dataset
+            companyAdapter.setCompanies(companies);
+            companyAdapter.notifyDataSetChanged();
+        });
+
         return root;
     }
 

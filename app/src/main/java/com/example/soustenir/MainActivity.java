@@ -1,14 +1,19 @@
 package com.example.soustenir;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -21,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.soustenir.databinding.ActivityMainBinding;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
-    FirebaseFirestore firestore;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,30 +46,29 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        firestore = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestore.setLoggingEnabled(true);
 
-//        Example for Firebase usage
-//        Map<String, Object> user =  new HashMap<>();
-//        user.put("firstname", "Nicole");
-//        user.put("lastname", "Droi");
-//
-//        firestore.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
-//            }
-//        });
+        db.collection("companies")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
 
+                });
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "User Feedback", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -93,3 +99,20 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 }
+
+//        Example for Firebase usage
+//        Map<String, Object> user =  new HashMap<>();
+//        user.put("firstname", "Nicole");
+//        user.put("lastname", "Droi");
+//
+//        firestore.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//            @Override
+//            public void onSuccess(DocumentReference documentReference) {
+//                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
+//            }
+//        });
