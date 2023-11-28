@@ -10,23 +10,28 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.soustenir.R;
 import com.example.soustenir.databinding.FragmentPartnersBinding;
 
 public class PartnersFragment extends Fragment {
 
     private FragmentPartnersBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        PartnersViewModel partnersViewModel =
-                new ViewModelProvider(this).get(PartnersViewModel.class);
-
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         binding = FragmentPartnersBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View view = binding.getRoot();
 
-        final TextView textView = binding.textPartners;
-        partnersViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        // Assuming you have these TextViews in your fragment_partners.xml
+        binding.textPartnerName.setText(R.string.partner_name);
+        binding.textPartnerDescription.setText(R.string.partner_description);
+
+        // If there's an ImageView for the partner's image
+        // You'd set the image resource like this:
+        binding.imagePartner.setImageResource(R.drawable.rectangle_1);
+
+        return view;
     }
 
     @Override

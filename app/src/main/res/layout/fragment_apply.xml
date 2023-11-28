@@ -6,19 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.apply.ApplyFragment">
 
-    <TextView
-        android:id="@+id/text_apply"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="#4CAF50">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/rounded_form_background"
+            android:elevation="4dp">
+
+            <!-- Company Name Input -->
+            <EditText
+                android:id="@+id/editTextCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/company_name_hint"
+                android:inputType="textPersonName"
+                android:padding="12dp"/>
+
+            <!-- Company Address Input -->
+            <EditText
+                android:id="@+id/editTextCompanyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/company_address_hint"
+                android:inputType="textPostalAddress"
+                android:padding="12dp"/>
+
+            <!-- Company URL Input -->
+            <EditText
+                android:id="@+id/editTextCompanyUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/company_url_hint"
+                android:inputType="textWebEditText"
+                android:padding="12dp"
+                android:autoLink="web"
+                android:maxLines="1"/>
+
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

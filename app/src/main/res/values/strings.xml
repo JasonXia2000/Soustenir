@@ -15,5 +15,14 @@
     <string name="menu_review">Review</string>
     <string name="title_activity_maps">MapsActivity</string>
 
+    <string name="company_name_hint">Enter company name</string>
+    <string name="company_address_hint">Enter company address</string>
+    <string name="submit">Submit</string>
+    <string name="company_url_hint">Enter company URL</string>
+
+    <string name="partner_name">Prof. John Doe</string>
+    <string name="partner_description">A university professor in environmental sciences with extensive research on sustainable development and ecological conservation.</string>
+    <string name="partner_image_description">Professor John Doe</string>
+
 
 </resources>
