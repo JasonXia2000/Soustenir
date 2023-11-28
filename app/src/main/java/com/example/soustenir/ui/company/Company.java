@@ -7,16 +7,18 @@ public class Company {
     private String description;
     private GeoPoint location; // Firestore GeoPoint
     private double score;
+    private String url;
 
     public Company() {
         // Default constructor required for calls to DataSnapshot.getValue(Company.class)
     }
 
-    public Company(String name, String description, GeoPoint location, double score) {
+    public Company(String name, String description, GeoPoint location, double score, String url) {
         this.name = name;
         this.description = description;
         this.location = location;
         this.score = score;
+        this.url = url;
     }
 
     // Getters and setters
@@ -24,12 +26,20 @@ public class Company {
         return name;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getDescription() {
         return description;
+    }
+    public String getUrl() {
+        return url;
     }
 
     public void setDescription(String description) {

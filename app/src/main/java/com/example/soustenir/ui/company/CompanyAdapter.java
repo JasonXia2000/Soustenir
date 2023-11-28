@@ -1,15 +1,23 @@
 package com.example.soustenir.ui.company;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.soustenir.R;
 import com.google.firebase.firestore.core.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyViewHolder> {
@@ -30,8 +38,8 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     }
 
     // Constructor
-    public CompanyAdapter(List<Company> myDataset) {
-        companies = myDataset;
+    public CompanyAdapter() {
+        companies = new ArrayList<>();
     }
 
     // Create new views (invoked by the layout manager)
@@ -47,14 +55,27 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
         notifyDataSetChanged(); // To notify the adapter of the new data
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(CompanyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CompanyViewHolder holder, int position) {
         Company company = companies.get(position);
         holder.companyNameTextView.setText(company.getName());
         holder.companyDescriptionTextView.setText(company.getDescription());
         holder.companyScoreTextView.setText(String.valueOf(company.getScore()));
+
+        holder.itemView.setOnClickListener(v -> {
+            // Set a breakpoint here to see if this is triggered
+            String url = company.getUrl();
+            if (url != null && !url.isEmpty() && (url.startsWith("http://") || url.startsWith("https://"))) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                v.getContext().startActivity(intent);
+            } else {
+                // Log an error or show a toast
+                Log.e("CompanyAdapter", "Invalid URL: " + url);
+                Toast.makeText(v.getContext(), "Invalid URL", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

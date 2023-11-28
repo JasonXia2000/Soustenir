@@ -22,6 +22,8 @@ public class CompanyFragment extends Fragment {
     private FragmentCompanyBinding binding;
     private CompanyAdapter companyAdapter;
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         CompanyViewModel companyViewModel =
@@ -30,22 +32,24 @@ public class CompanyFragment extends Fragment {
         binding = FragmentCompanyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-        RecyclerView companyView = binding.companyView;
-        companyView.setLayoutManager(new LinearLayoutManager(getContext()));
-        companyAdapter = new CompanyAdapter(new ArrayList<>());
-        companyView.setAdapter(companyAdapter);
+        setupRecyclerView();
 
         // Observe the LiveData in the ViewModel
         companyViewModel.getCompaniesLiveData().observe(getViewLifecycleOwner(), companies -> {
             // Update the adapter's dataset
             companyAdapter.setCompanies(companies);
-            companyAdapter.notifyDataSetChanged();
+            // notifyDataSetChanged is called inside setCompanies in the adapter
         });
 
         return root;
     }
 
+    private void setupRecyclerView() {
+        RecyclerView companyView = binding.companyView;
+        companyView.setLayoutManager(new LinearLayoutManager(getContext()));
+        companyAdapter = new CompanyAdapter(); // Initialize with empty list or remove the argument
+        companyView.setAdapter(companyAdapter);
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

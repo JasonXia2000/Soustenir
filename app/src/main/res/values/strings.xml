@@ -19,6 +19,8 @@
     <string name="company_address_hint">Enter company address</string>
     <string name="submit">Submit</string>
     <string name="company_url_hint">Enter company URL</string>
+    <string name="description_hint">Review goes here</string>
+    <string name="rating_hint">Enter rating</string>
 
     <string name="partner_name">Prof. John Doe</string>
     <string name="partner_description">A university professor in environmental sciences with extensive research on sustainable development and ecological conservation.</string>
